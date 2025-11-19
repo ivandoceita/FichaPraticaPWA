@@ -9,5 +9,11 @@ git stash: esconde/guarda as tuas alterações num “stash” (pilha), deixando
 git stash pop: Traz de volta (reaplica) as alterações guardadas no stash para a working directory e remove esse item da pilha de stashes.
 É útil quando precisa-se de mudar de branch rapidamente sem perder o que se esta a fazer.
 2 – Quais sáo as vantagens de usar Branchs num repositório git? 
+*Ajuda no isolamento de trabalho, correção de bug ou experimento pode ser desenvolvida numa branch própria, sem mexer no código estável (
+Desenvolvimento paralelo , sendo que várias pessoas podem trabalhar em tarefas diferentes ao mesmo tempo.
+
+*A branch principal mantém-se mais estável e protegida
+
+*Pode-se criar branches para testar ideias novas; se correr mal, é só apagar a branch sem estragar o código principal.
 3 – Nos Merges de conteúdos resultantes de um “Pop” podem resultar em conflitos. Em que consistem e como podem ser resolvidos esses conflitos? 
 4 – “Clone” e “Fork” são formas diferentes de replicar um repositório Git. Quais as diferenças entre eles? 
