@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <title>Curriculum Vitae - SPA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Ícones de redes sociais (Font Awesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f4f4f4;
+      color: #333;
+      padding-bottom: 70px; /* espaço para o footer fixo */
+    }
+
+    header {
+      background: #1a237e;
+      color: #fff;
+      padding: 20px 0;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      margin-bottom: 5px;
+    }
+
+    header p {
+      margin-bottom: 15px;
+      opacity: 0.9;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      padding-bottom: 4px;
+    }
+
+    nav a.active {
+      border-bottom: 2px solid #ffeb3b;
+    }
+
+    main {
+      padding: 30px 0 60px;
+    }
+
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #1a237e;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    footer {
+      background: #212121;
+      color: #eee;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-icons a {
+      color: #eee;
+      margin-right: 10px;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Animação simples na troca de secções */
+    .content-enter-active,
+    .content-leave-active {
+      transition: opacity 0.2s;
+    }
+
+    .content-enter-from,
+    .content-leave-to {
+      opacity: 0;
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- CABEÇALHO / MENU -->
+    <header>
+      <div class="container">
+        <h1>{{ nome }}</h1>
+        <p>{{ titulo }}</p>
+
+        <nav>
+          <ul>
+            <li>
+              <a href="#" :class="{ active: secaoAtual === 'quem' }" @click.prevent="mudarSecao('quem')">
+                Quem sou eu?
+              </a>
+            </li>
+            <li>
+              <a href="#" :class="{ active: secaoAtual === 'o-que-faco' }" @click.prevent="mudarSecao('o-que-faco')">
+                O que faço?
+              </a>
+            </li>
+            <li>
+              <a href="#" :class="{ active: secaoAtual === 'hobbies' }" @click.prevent="mudarSecao('hobbies')">
+                Hobbies
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO SPA -->
+    <main class="container">
+      <transition name="content" mode="out-in">
+        <!-- SECÇÃO: QUEM SOU EU -->
+        <section v-if="secaoAtual === 'quem'" key="quem">
+          <h2>Quem sou eu?</h2>
+          <p>
+            Sou {{ nome }}, {{ idade }} anos, apaixonado por tecnologia e desenvolvimento web.
+            Trabalho no Instituto Nacional de estatística de São Tomé e Príncipe e trabalho com {{ experienciaPrincipal }} e interesse especial em {{ interesses }}.
+          </p>
+          <p>
+            Considero-me uma pessoa {{ caracteristicas }} e procuro evoluir continuamente na área das
+            tecnologias de informação.
+          </p>
+        </section>
+
+        <!-- SECÇÃO: O QUE FAÇO -->
+        <section v-else-if="secaoAtual === 'o-que-faco'" key="o-que-faco">
+          <h2>O que faço?</h2>
+          <p>
+            Atualmente atuo na área de {{ areaAtuacao }}, onde desempenho as seguintes funções principais:
+          </p>
+          <ul>
+            <li v-for="t in tarefas" :key="t">{{ t }}</li>
+          </ul>
+        </section>
+
+        <!-- SECÇÃO: HOBBIES -->
+        <section v-else key="hobbies">
+          <h2>Hobbies</h2>
+          <p>No meu tempo livre gosto de:</p>
+          <ul>
+            <li v-for="h in hobbies" :key="h">{{ h }}</li>
+          </ul>
+        </section>
+      </transition>
+    </main>
+
+    <!-- RODAPÉ (IDENTIDADE VIRTUAL) -->
+    <footer>
+      <div class="container">
+        <span>&copy; 2025 {{ nome }} - Curriculum Vitae</span>
+        <div class="social-icons">
+          <!-- Coloca aqui os teus links reais, se quiseres -->
+          <a href="https://facebook.com/" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a href="https://twitter.com/" target="_blank" aria-label="Twitter">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/" target="_blank" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- VueJS (CDN) -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          secaoAtual: 'quem', // secção inicial
+          // ---- Dados do "CV" (troca para os teus) ----
+          nome: 'Ivando Carvalho Viegas de Ceita',
+          titulo: 'Estudante de Engenharia Informática e Aplicações Web',
+          idade: 38,
+          experienciaPrincipal: 'desenvolvimento de aplicações web, análise de dados, programação de questionarios e base de dados',
+          interesses: 'melhorar as minhas capacidades em aplicações Web',
+          caracteristicas: 'organizada, proativa e focada em resultados',
+          areaAtuacao: 'tecnologias de informação e estatística oficial',
+          tarefas: [
+            'Desenvolvimento e manutenção de páginas e aplicações web',
+            'Modelação e análise de dados em bases de dados relacionais',
+            'Apoio técnico na recolha e difusão de dados estatísticos',
+            'Criação de questionarios para recolha de dados'
+          ],
+          hobbies: [
+            'Academia, Dj e Ajudar pessoas',
+            'Jogar futebol e acompanhar desporto',
+            'Aprender coisas novas - INOVAÇÔES'
+          ]
+        };
+      },
+      methods: {
+        mudarSecao(secao) {
+          this.secaoAtual = secao;
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
