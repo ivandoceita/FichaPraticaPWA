@@ -20,3 +20,5 @@ Os conflitos consistem em situações em que duas versões do mesmo trecho de c�
 
 Resolve-se analizando as duas versões e decidir com qual das versões vai se manter ou combinar as duas manualmente.
 4 – “Clone” e “Fork” são formas diferentes de replicar um repositório Git. Quais as diferenças entre eles? 
+
+Clone - cria uma cópia local de um repositório remoto existente enquanto o Fork cria uma cópia do repositório remoto na tua própria conta, ou seja, no próprio repositório. 
